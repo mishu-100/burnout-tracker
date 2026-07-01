@@ -1,0 +1,30 @@
+const sqlite3 = require('sqlite3').verbose();
+
+const db = new sqlite3.Database('./burnout.db', (err) => {
+  if (err) {
+    console.error('Error opening database:', err.message);
+  } else {
+    console.log('Connected to SQLite database.');
+  }
+});
+
+// Create tables if they don't already exist
+db.serialize(() => {
+  db.run(`CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+  )`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS entries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    date TEXT NOT NULL,
+    sleep_hours REAL NOT NULL,
+    study_hours REAL NOT NULL,
+    mood INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  )`);
+});
+
+module.exports = db;

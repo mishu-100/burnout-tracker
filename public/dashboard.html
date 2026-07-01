@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Burnout Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="topbar">
+    <h1>Burnout Tracker</h1>
+    <button onclick="logout()">Log Out</button>
+  </div>
+
+  <div class="main">
+    <div class="card">
+      <h2>Log Today's Entry</h2>
+      <label>Sleep hours</label>
+      <input type="number" id="sleep" step="0.5" placeholder="e.g. 6.5">
+
+      <label>Study hours</label>
+      <input type="number" id="study" step="0.5" placeholder="e.g. 7">
+
+      <label>Mood (1 = terrible, 5 = great)</label>
+      <input type="number" id="mood" min="1" max="5" placeholder="1-5">
+
+      <button onclick="addEntry()">Save Entry</button>
+      <p id="entryMessage"></p>
+    </div>
+
+    <div class="card">
+      <h2>Burnout Risk</h2>
+      <div id="riskResult">No data yet</div>
+    </div>
+
+    <div class="card wide">
+      <h2>Your Trends</h2>
+      <canvas id="trendChart"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
